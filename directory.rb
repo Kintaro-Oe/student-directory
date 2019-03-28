@@ -33,8 +33,18 @@ end
 
 def print(students)
   students.each_with_index  do |student, index|
-    #print students that begin with 'd'""
-    if student[:name][0] == "d"
+    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)}"
+  end
+end
+
+def print_begins_with(students)
+  #ask for character
+  puts "enter first character:"
+  begins = gets.chomp
+  
+  students.each_with_index  do |student, index|
+    #print students that beginning with character given
+    if student[:name][0] == begins
       puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)}"
     end
   end
@@ -46,5 +56,6 @@ end
 #call the methods to see results
 students = input_students
 print_header
-print(students)
+#print(students)
+print_begins_with(students)
 print_footer(students)
