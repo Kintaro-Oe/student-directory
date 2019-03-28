@@ -22,8 +22,8 @@ def input_students
     
     # add the student hash to the array
     students << {
-      name: name,
-      cohort: cohort,
+      name: name.to_sym,
+      cohort: cohort.to_sym,
       hobbies: "evil",
       country_of_birth: "fiction",
       height: "tall..."
