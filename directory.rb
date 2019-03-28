@@ -33,7 +33,10 @@ end
 
 def print(students)
   students.each_with_index  do |student, index|
-    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)}"
+    #print students that begin with 'd'""
+    if student[:name][0] == "d"
+      puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)}"
+    end
   end
 end
 
