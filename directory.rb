@@ -4,14 +4,22 @@ def input_students
   puts "Please enter the name of the student"
   #create an empty array
   students = []
-  #gets first name
+  #gets first name or uses 'default'
   name = gets.chomp
+  name == "" ? name = "default" : name
+  
   puts "Please enter the student's cohort"
   puts "To finish, just hit return twice"
-  #gets cohort
+  
+  #gets cohort or uses 'default'
   cohort = gets.chomp
+  cohort == "" ? cohort = "default" : cohort
+  
   #while name is not empty, repeat this code
-  while !name.empty? && !cohort.empty? do
+  until name == "default" && cohort == "default" do
+    # break if name and cohort equal 'default'
+
+    
     # add the student hash to the array
     students << {
       name: name,
@@ -21,13 +29,18 @@ def input_students
       height: "tall..."
     }
     puts "Now we have ##{students.count} students"
+    
     # request another name
     puts "Enter next student name"
-    # get another student name from user
+    
+    # get another student name from user or use 'default'
     name = gets.chomp
+    name == "" ? name = "default" : name
+    
     puts "Enter student cohort"
-    # get cohort from user
+    # get cohort from user or use 'default'
     cohort = gets.chomp
+    cohort == "" ? cohort = "default" : cohort
   end
   # return the array of students
   students
