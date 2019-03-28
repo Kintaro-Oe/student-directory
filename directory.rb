@@ -5,7 +5,14 @@ def input_students
   #create an empty array
   students = []
   #gets first name or uses 'default'
-  name = gets.chomp
+  while true do
+    name = gets.chomp 
+    puts "type 'c' to confirm or 'r' to retype"
+    command = gets.chomp
+    if command == "c"
+      break
+    end
+  end
   name == "" ? name = "default" : name
   
   puts "Please enter the student's cohort"
@@ -34,7 +41,16 @@ def input_students
     puts "Enter next student name"
     
     # get another student name from user or use 'default'
-    name = gets.chomp
+    while true do
+      name = gets.chomp 
+      puts "type 'c' to confirm or 'r' to retype"
+      command = gets.chomp
+      if command == "c"
+        break
+      elsif command == ""
+        break
+      end
+    end
     name == "" ? name = "default" : name
     
     puts "Enter student cohort"
