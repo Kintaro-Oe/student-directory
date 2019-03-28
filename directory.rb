@@ -1,4 +1,5 @@
 # put all of the students into an array
+# add new info. Hardcoded but easy to add variable = gets.chomp and update hash to activate
 def input_students
   puts "Please enter the name of the student"
   #create an empty array
@@ -12,7 +13,13 @@ def input_students
   #while name is not empty, repeat this code
   while !name.empty? && !cohort.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: cohort}
+    students << {
+      name: name,
+      cohort: cohort,
+      hobbies: "evil",
+      country_of_birth: "fiction",
+      height: "tall..."
+    }
     puts "Now we have ##{students.count} students"
     # request another name
     puts "Enter next student name"
@@ -33,7 +40,12 @@ end
 
 def print(students)
   students.each_with_index  do |student, index|
-    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)}"
+    puts "
+    #{index+1}. #{student[:name]} (#{student[:cohort]} cohort), 
+    hobbies: #{student[:hobbies]},
+    country of birth: #{student[:country_of_birth]},
+    height: #{student[:height]}
+    "
   end
 end
 
@@ -76,8 +88,8 @@ end
 #call the methods to see results
 students = input_students
 print_header
-#print(students)
+print(students)
 #print_names_beginning_with(students)
 #print_names_shorter_than_12_chars(students)
-print_no_each(students)
+#print_no_each(students)
 print_footer(students)
