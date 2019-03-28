@@ -37,6 +37,15 @@ def print(students)
   end
 end
 
+#same function as above but without using .each
+def print_no_each(students)
+  counter = 0
+  while counter < students.count do
+    puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)}"
+    counter += 1
+  end
+end
+
 def print_names_beginning_with(students)
   #ask for character
   puts "enter first character:"
@@ -69,5 +78,6 @@ students = input_students
 print_header
 #print(students)
 #print_names_beginning_with(students)
-print_names_shorter_than_12_chars(students)
+#print_names_shorter_than_12_chars(students)
+print_no_each(students)
 print_footer(students)
