@@ -37,7 +37,7 @@ def print(students)
   end
 end
 
-def print_begins_with(students)
+def print_names_beginning_with(students)
   #ask for character
   puts "enter first character:"
   begins = gets.chomp
@@ -50,6 +50,17 @@ def print_begins_with(students)
   end
 end
 
+def print_names_shorter_than_12_chars(students)
+  length = 12
+  
+  students.each_with_index  do |student, index|
+    #print students with names shorter than 12 characters
+    if student[:name].length < length
+      puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)}"
+    end
+  end
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -57,5 +68,6 @@ end
 students = input_students
 print_header
 #print(students)
-print_begins_with(students)
+#print_names_beginning_with(students)
+print_names_shorter_than_12_chars(students)
 print_footer(students)
