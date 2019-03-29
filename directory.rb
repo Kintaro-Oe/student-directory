@@ -65,6 +65,20 @@ def print(students)
   end
 end
 
+def print_by_cohort(students)
+  cohort_sort = Hash.new {|k,v| k[v] = []}
+  
+  students.map do |student|
+    cohort_sort[student[:cohort]] << student
+  end
+  
+  #print each cohort key, value
+  cohort_sort.each do |cohort,students|
+    puts cohort
+    print(students) #can I use an existing method?
+  end
+end
+
 #same function as above but without using .each
 def print_no_each(students)
   counter = 0
@@ -108,4 +122,5 @@ print(students)
 #print_names_beginning_with(students)
 #print_names_shorter_than_12_chars(students)
 #print_no_each(students)
+print_by_cohort(students)
 print_footer(students)
