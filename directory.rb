@@ -1,62 +1,51 @@
-# put all of the students into an array
-# add new info. Hardcoded but easy to add variable = gets.chomp and update hash to activate
-def input_students
-  puts "Please enter the name of the student"
-  #create an empty array
-  students = []
-  #gets first name or uses 'default'
-  while true do
-    name = gets.chomp 
-    puts "type 'c' to confirm or 'r' to retype"
-    command = gets.chomp
-    if command == "c"
-      break
+def get_name
+    while true do
+      puts "Name: "
+      name = gets.chomp 
+      
+      puts "type 'c' to confirm, or hit return to retype"
+      command = gets.chomp
+      break if command == "c"
     end
-  end
   name == "" ? name = "default" : name
-  
-  puts "Please enter the student's cohort"
-  puts "To finish, just hit return twice"
-  
-  #gets cohort or uses 'default'
+  return name.to_sym
+end
+
+def get_cohort
+  puts "Cohort:"
   cohort = gets.chomp
   cohort == "" ? cohort = "default" : cohort
-  
-  #while name is not empty, repeat this code
-  until name == "default" && cohort == "default" do
-    # break if name and cohort equal 'default'
+  return cohort.to_sym
+end
 
-    
-    # add the student hash to the array
+def input_students
+  # create an empty array
+  students = []
+  
+  # get details or use 'default'
+  puts "Please enter new student details"
+  name = get_name
+  cohort = get_cohort
+  
+  puts "***Leave Name and Cohort empty to exit.***".center(50)
+  puts "Warning incomplete entries will not be saved!".center(50)
+  
+  #breaks if BOTH name and cohort are empty or :default
+  until name == :default && cohort == :default do
+  
+    # add hash to the array.
     students << {
-      name: name.to_sym,
-      cohort: cohort.to_sym,
+      name: name,
+      cohort: cohort,
       hobbies: "evil",
       country_of_birth: "fiction",
       height: "tall..."
     }
     puts "Now we have ##{students.count} students"
     
-    # request another name
-    puts "Enter next student name"
-    
-    # get another student name from user or use 'default'
-    while true do
-      name = gets.chomp 
-      puts "type 'c' to confirm or 'r' to retype"
-      command = gets.chomp
-      if command == "c"
-        break
-      elsif command == ""
-        break
-      end
-    end
-    name == "" ? name = "default" : name
-    
-    puts "Enter student cohort"
-    # get cohort from user or use 'default'
-    cohort = gets.chomp
-    cohort == "" ? cohort = "default" : cohort
+    puts "Enter next student's details"
+    name = get_name
+    cohort = get_cohort
   end
   # return the array of students
   students
@@ -86,7 +75,6 @@ def print_no_each(students)
 end
 
 def print_names_beginning_with(students)
-  #ask for character
   puts "enter first character:"
   begins = gets.chomp
   
@@ -112,6 +100,7 @@ end
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
+
 #call the methods to see results
 students = input_students
 print_header
