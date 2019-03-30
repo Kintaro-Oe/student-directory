@@ -1,4 +1,5 @@
 def get_name
+# demonstrates one method of allowing the user to correct typos
     while true do
       puts "Name: "
       name = gets.chomp 
@@ -12,8 +13,9 @@ def get_name
 end
 
 def get_cohort
+# demonstrates an alternative \n removal than .chomp
   puts "Cohort:"
-  cohort = gets.chomp
+  cohort = gets.delete_suffix!("\n")
   cohort == "" ? cohort = "default" : cohort
   return cohort.to_sym
 end
