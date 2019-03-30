@@ -29,7 +29,7 @@ def input_students
   name = get_name
   cohort = get_cohort
   
-  puts "***Leave Name and Cohort empty to exit.***".center(50)
+  puts "***Leaving Name and Cohort empty will exit.***".center(50)
   puts "Warning incomplete entries will not be saved!".center(50)
   
   #breaks if BOTH name and cohort are empty or :default
@@ -90,7 +90,7 @@ def print_no_each(students)
     puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)}"
     counter += 1
   end
-__END__
+end
 
 def print_names_beginning_with(students)
   puts "enter first character:"
@@ -125,10 +125,12 @@ end
 
 #call the methods to see results
 students = input_students
-print_header
-print(students)
-#print_names_beginning_with(students)
-#print_names_shorter_than_12_chars(students)
-#print_no_each(students)
-print_by_cohort(students)
-print_footer(students)
+if students.count > 0
+  print_header
+  #print(students)
+  #print_names_beginning_with(students)
+  #print_names_shorter_than_12_chars(students)
+  #print_no_each(students)
+  print_by_cohort(students)
+  print_footer(students)    
+end
