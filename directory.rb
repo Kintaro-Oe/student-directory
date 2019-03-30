@@ -1,3 +1,5 @@
+@students = [] # an empty array accessible to all methods
+
 def get_name
   # demonstrates one method of allowing the user to correct typos
     while true do
@@ -21,9 +23,6 @@ def get_cohort
 end
 
 def input_students
-  # create an empty array
-  students = []
-  
   # get details or use 'default'
   puts "Please enter new student details"
   name = get_name
@@ -36,21 +35,19 @@ def input_students
   until name == :default && cohort == :default do
   
     # add hash to the array.
-    students << {
+    @students << {
       name: name,
       cohort: cohort,
       hobbies: "evil",
       country_of_birth: "fiction",
       height: "tall..."
     }
-    puts "Now we have ##{students.count} students"
+    puts "Now we have ##{@students.count} students"
     
     puts "Enter next student's details"
     name = get_name
     cohort = get_cohort
   end
-  # return the array of students
-  students
 end
 
 def print_header
@@ -58,7 +55,7 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
+def print_students_list(students = @students) #optional parameter lets this method be used in 'print_cohort'
   students.each_with_index  do |student, index|
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)".center(30)
     puts "hobbies: #{student[:hobbies]}".center(30)
@@ -67,36 +64,35 @@ def print(students)
   end
 end
 
-def print_by_cohort(students)
+def print_by_cohort
   cohort_sort = Hash.new {|k,v| k[v] = []}
   
   #populate the hash
-  students.map do |student|
+  @students.map do |student|
     cohort_sort[student[:cohort]] << student
   end
   
   #print cohort and students
   cohort_sort.each do |cohort,students|
     puts cohort
-    print(students) #Utilize an existing method!
+    print_students_list(students) #Utilize an existing method!
   end
 end
 
-
-def print_no_each(students)
+def print_no_each
   #same function as above but without using .each
   counter = 0
-  while counter < students.count do
-    puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)}"
+  while counter < @students.count do
+    puts "#{@students[counter][:name]} (#{@students[counter][:cohort]} cohort)}"
     counter += 1
   end
 end
 
-def print_names_beginning_with(students)
+def print_names_beginning_with
   puts "enter first character:"
   begins = gets.chomp
   
-  students.each_with_index  do |student, index|
+  @students.each_with_index  do |student, index|
     #print students that beginning with character given
     if student[:name][0] == begins
       puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)}"
@@ -104,10 +100,10 @@ def print_names_beginning_with(students)
   end
 end
 
-def print_names_shorter_than_12_chars(students)
+def print_names_shorter_than_12_chars
   length = 12
   
-  students.each_with_index  do |student, index|
+  @students.each_with_index  do |student, index|
     #print students with names shorter than 12 characters
     if student[:name].length < length
       puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)}"
@@ -115,40 +111,47 @@ def print_names_shorter_than_12_chars(students)
   end
 end
 
-def print_footer(students)
-  if students.count == 1
+def print_footer
+  if @students.count == 1
     puts "Overall, we have 1 great student"
   else
-    puts "Overall, we have #{students.count} great students"
+    puts "Overall, we have #{@students.count} great students"
+  end
+end
+
+def print_menu
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+end
+
+def show_students
+  print_header
+  #print_students_list
+  #print_names_beginning_with
+  #print_names_shorter_than_12_chars
+  #print_no_each
+  print_by_cohort
+  print_footer
+end
+
+def process(selection)
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit #this will cause the program to terminate
+    else
+      puts "I don't know what you meant, try again"
   end
 end
 
 def interactive_menu
-  students = []
   loop do
-    # 1. print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    # 2. read the input and save it into a variable
-    selection = gets.chomp  
-    # 3. do what the user has asked
-    case selection
-      when "1"
-        students = input_students
-      when "2"
-        print_header
-        #print(students)
-        #print_names_beginning_with(students)
-        #print_names_shorter_than_12_chars(students)
-        #print_no_each(students)
-        print_by_cohort(students)
-        print_footer(students) 
-      when "9"
-        exit #this will cause the program to terminate
-      else
-        puts "I don't know what you meant, try again"
-    end
+    print_menu
+    process(gets.chomp)
   end
 end
 
