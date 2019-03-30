@@ -1,5 +1,5 @@
 def get_name
-# demonstrates one method of allowing the user to correct typos
+  # demonstrates one method of allowing the user to correct typos
     while true do
       puts "Name: "
       name = gets.chomp 
@@ -13,7 +13,7 @@ def get_name
 end
 
 def get_cohort
-# demonstrates an alternative \n removal than .chomp
+  # demonstrates an alternative \n removal than .chomp
   puts "Cohort:"
   cohort = gets.delete_suffix!("\n")
   cohort == "" ? cohort = "default" : cohort
@@ -70,25 +70,27 @@ end
 def print_by_cohort(students)
   cohort_sort = Hash.new {|k,v| k[v] = []}
   
+  #populate the hash
   students.map do |student|
     cohort_sort[student[:cohort]] << student
   end
   
-  #print each cohort key, value
+  #print cohort and students
   cohort_sort.each do |cohort,students|
     puts cohort
-    print(students) #can I use an existing method?
+    print(students) #Utilize an existing method!
   end
 end
 
-#same function as above but without using .each
+
 def print_no_each(students)
+  #same function as above but without using .each
   counter = 0
   while counter < students.count do
     puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)}"
     counter += 1
   end
-end
+__END__
 
 def print_names_beginning_with(students)
   puts "enter first character:"
